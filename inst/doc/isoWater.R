@@ -7,18 +7,30 @@ library(isoWater)
 ## ----values-------------------------------------------------------------------
 wiDB_values(c("types", "countries"))
 
-## ----sites, fig.width=5, fig.asp=0.6------------------------------------------
-ls = wiDB_sites(countries = "US", types = "Lake")
+## ----query1-------------------------------------------------------------------
+ls = wiDB_sites(countries = "US", types = "Lake_or_pond")
 ps = wiDB_sites(countries = "US", types = "Precipitation")
+
+## ----siteData, include=FALSE--------------------------------------------------
+ls = readRDS("lsl.rds")
+ps = readRDS("psl.rds")
+
+## ----sites, fig.width=5, fig.asp=0.6------------------------------------------
 omar = par("mar")
 par(mar = c(4, 4, 1, 1))
 plot(ls[, 2:1], xlim = c(-125, -68), ylim = c(25, 50))
 points(ps[, 2:1], col = "red")
 par(mar = omar)
 
-## ----data---------------------------------------------------------------------
+## ----query2-------------------------------------------------------------------
 ld = wiDB_data(minLat = 41, maxLat = 42, minLong = -94, maxLong = -93, types = "Lake")
 pd = wiDB_data(minLat = 41, maxLat = 42, minLong = -94, maxLong = -93, types = "Precipitation")
+
+## ----dataData, include = FALSE------------------------------------------------
+ld = readRDS("ldl.rds")
+pd = readRDS("pdl.rds")
+
+## ----data---------------------------------------------------------------------
 ld$data
 pd$projects
 

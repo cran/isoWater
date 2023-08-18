@@ -1,5 +1,9 @@
 # isoWater news
 
+## isoWater 1.1.2
+* Bug fixes
+* mixSource function now allows optional prior on O-isotope evaporation effect
+
 ## isoWater 1.1.1
 * iso function now checks for and removes data with missing values
 * Bug fixes and error checking
