@@ -23,7 +23,7 @@ points(ps[, 2:1], col = "red")
 par(mar = omar)
 
 ## ----query2-------------------------------------------------------------------
-ld = wiDB_data(minLat = 41, maxLat = 42, minLong = -94, maxLong = -93, types = "Lake")
+ld = wiDB_data(minLat = 41, maxLat = 42, minLong = -94, maxLong = -93, types = "Lake_or_pond")
 pd = wiDB_data(minLat = 41, maxLat = 42, minLong = -94, maxLong = -93, types = "Precipitation")
 
 ## ----dataData, include = FALSE------------------------------------------------
