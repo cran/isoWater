@@ -162,11 +162,10 @@ wiDB_data = function(minLat = NULL, maxLat = NULL, minLong = NULL, maxLong = NUL
     fields = gsub("  ", "", fields)
     fields = gsub(" ", "", fields)
     fels = strsplit(fields, ",")
-    fels = fels[[1]]
     for(i in 1:length(fels)){
-      if(!(fels[i] %in% flist)){stop(paste("Value", i, "in fields is not a valid field name"))}
+      if(!(fels[[i]] %in% flist)){stop(paste("Value", i, "in fields is not a valid field name"))}
     }
-    qStr = paste0(qStr, "&return=", fields)
+    qStr = paste0(qStr, "&return=", paste(fields, collapse = ","))
   }
   
   baseStr = "https://wateriso.utah.edu/api/v1/download.php"
@@ -200,18 +199,19 @@ wiDB_data = function(minLat = NULL, maxLat = NULL, minLong = NULL, maxLong = NUL
   
   fn = g$headers$`content-disposition`
   fn = strsplit(fn, "=")[[1]][2]
-  writeBin(g$content, paste0(tmpdir, "/", fn))
+  writeBin(g$content, file.path(tmpdir, fn))
 
   #unzip and output .csv
-  unzip(paste0(tmpdir, "/", fn), exdir = paste0(tmpdir, "/downloads"))  
+  unzip(file.path(tmpdir, fn), exdir = file.path(tmpdir, "downloads"), 
+        junkpaths = TRUE)  
   
   #get and order file list
   froot = strsplit(fn, "-")[[1]][1]
-  df = paste0(tmpdir, "/downloads/", froot, "-data.csv")
-  pf = paste0(tmpdir, "/downloads/", froot, "-project.csv")
-  
+  df = file.path(tmpdir, "downloads", paste0(froot, "-data.csv"))
+  pf = file.path(tmpdir, "downloads", paste0(froot, "-project.csv"))
+
   if(file.size(df) == 0){
-    file.remove(c(paste0(tmpdir, "/", fn), df, pf))  
+    file.remove(c(file.path(tmpdir, fn), df, pf))  
     warning("No records returned")
     return(NULL)
   }
@@ -222,7 +222,7 @@ wiDB_data = function(minLat = NULL, maxLat = NULL, minLong = NULL, maxLong = NUL
   #read in projects
   p = read.csv(pf)
   
-  file.remove(paste0(tmpdir, "/", fn))  
+  file.remove(file.path(tmpdir, fn))  
   
   if(clean){
     file.remove(c(df, pf))

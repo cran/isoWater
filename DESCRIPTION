@@ -1,7 +1,7 @@
 Package: isoWater
 Type: Package
 Title: Discovery, Retrieval, and Analysis of Water Isotope Data
-Version: 1.2.0
+Version: 1.2.1
 Authors@R: person("Gabe", "Bowen", email = "gabe.bowen@utah.edu",
                   role = c("aut", "cre"))
 Maintainer: Gabe Bowen <gabe.bowen@utah.edu>
@@ -21,7 +21,7 @@ Language: en-US
 Encoding: UTF-8
 LazyData: true
 NeedsCompilation: no
-Packaged: 2024-07-23 16:57:44 UTC; u0133977
+Packaged: 2025-07-01 18:19:18 UTC; u0133977
 Author: Gabe Bowen [aut, cre]
 Repository: CRAN
-Date/Publication: 2024-07-23 17:10:06 UTC
+Date/Publication: 2025-07-01 18:30:02 UTC
